@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - All Users</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<br/>
+<h2>Users database - Admin Panel</h2>
+<table class="main-table" th:border="1">
+    <tr class="tr-grey">
+        <td>Id</td>
+        <td>Username</td>
+        <td>Roles</td>
+        <td colspan="3">Operations</td>
+    </tr>
+    <tr th:each="user : ${usersToShow}">
+        <td th:text="${user.id}" class="td-grey">text</td>
+        <td th:text="${user.username}">text</td>
+        <td>
+            <div th:each="role: ${user.roles}" class="div_to_left">
+                <div th:text="'+ ' + ${role.name}"></div>
+            </div>
+        </td>
+        <td class="td-grey">
+            <form th:method="GET" th:action="@{/user/{id}(id=${user.id})}">
+                <input type="submit" value="See Info"/>
+            </form>
+        </td>
+        <td class="td-grey">
+            <form th:method="GET" th:action="@{/admin/user/{id}/edit(id=${user.id})}">
+                <input type="submit" value="Edit"/>
+            </form>
+        </td>
+        <td class="td-grey">
+            <form th:method="DELETE" th:action="@{/admin/user/{id}(id=${user.id})}">
+                <input type="submit" value="Delete"/>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6">
+            <br/>
+            <div class="div_to_center">
+                <form th:method="GET" th:action="@{/admin/user/new}">
+                    <input type="submit" value="Add user"/>
+                </form>
+            </div>
+            <div class="div_to_left_2">
+                <form th:method="POST" th:action="@{/logout}">
+                    <input type="submit" value="Log out"/>
+                </form>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

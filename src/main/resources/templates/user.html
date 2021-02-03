@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>User's private page</title>
+    <link th:href="@{/css/main.css}" rel="stylesheet">
+</head>
+<body>
+<br><br>
+<h2>User Info</h2>
+<br><br>
+<div class="div_in_user" th:object="${userToShow}">
+    <label>User id:</label>
+    <div class="div_in_user" th:text="*{id}"/>
+    <br/>
+    <label>Username:</label>
+    <div class="div_in_user" th:text="*{username}"/>
+    <br/>
+    <label>Password:</label>
+    <div class="div_in_user" th:text="*{password}"/>
+    <br/>
+    <label>Name:</label>
+    <div class="div_in_user" th:text="*{name}"/>
+    <br/>
+    <label>Surname:</label>
+    <div class="div_in_user" th:text="*{surname}"/>
+    <br/>
+    <div class="div_to_center">
+        <form th:method="POST" th:action="@{/logout}">
+            <input type="submit" value="Log out"/>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>
