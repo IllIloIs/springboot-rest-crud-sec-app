@@ -1,40 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
-<html>
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>User's private page</title>
-    <link th:href="@{/css/main.css}" rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<title>Admin Panel</title>
 </head>
 <body>
-<br><br>
-<h2>User Info</h2>
-<br><br>
-<div class="div_in_user" th:object="${userToShow}">
-    <label>User id:</label>
-    <div class="div_in_user" th:text="*{id}"/>
-    <br/>
-    <label>Username:</label>
-    <div class="div_in_user" th:text="*{username}"/>
-    <br/>
-    <label>Password:</label>
-    <div class="div_in_user" th:text="*{password}"/>
-    <br/>
-    <label>Name:</label>
-    <div class="div_in_user" th:text="*{name}"/>
-    <br/>
-    <label>Surname:</label>
-    <div class="div_in_user" th:text="*{surname}"/>
-    <br/>
-    <div class="div_to_center">
-        <form th:method="POST" th:action="@{/logout}">
-            <input type="submit" value="Log out"/>
-        </form>
-    </div>
+<div class="d-flex flex-column flex-root">
+	<!--	header line-->
+	<div class="container-fluid">
+		<div class="row" th:object="${currentUser}">
+			<div class="col-md-9 text-left bg-dark text-light align-middle pt-2" th:text="${currentUser.username} + ' with roles: ' + ${currentUser.rolesToSingleString()}"></div>
+			<div class="col-md-3 text-right bg-dark">
+				<form th:action="@{/logout}" th:method="POST">
+					<button class="btn btn-link text-muted text-decoration-none" type="submit">Logout</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!--	main content area-->
+	<div class="d-flex flex-row flex-column-fluid page">
+		<!--	role side (left)-->
+		<div class="aside pt-4">
+			<div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical" th:object="${currentUser}">
+				<a href="#userPage" class="nav-link active" data-toggle="pill" id="userPageSelector" role="tab" aria-controls="userPage">User</a>
+			</div>
+		</div>
+		<!--	content side (right)-->
+		<div class="wrapper py-4">
+			<div class="tab-content" role="tab-content">
+				<!--	User page-->
+				<div class="tab-pane bg-transparent fade show active px-4" role="tabpanel" id="userPage" aria-labelledby="userPageSelector">
+					<h2 class="py-2">User information-page</h2>
+					<!--	Current user page content-->
+					<div class="tab-pane fade show active" id="showCurrentUsers" role="tabpanel" aria-labelledby="usersTableTab">
+						<h5 class="text-left bg-transparent pb-2 pt-3 pl-4">About user</h5>
+						<div class="card">
+							<div class="card-block px-4 pt-4 pb-2">
+								<table class="table table-hover w-100">
+									<thead>
+									<tr>
+										<th>ID</th>
+										<th>First Name</th>
+										<th>Last Name</th>
+										<th>Age</th>
+										<th>Email</th>
+										<th>Role</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr th:object="${currentUser}">
+										<td th:text="*{id}">text</td>
+										<td th:text="*{firstName}">text</td>
+										<td th:text="*{lastName}">text</td>
+										<td th:text="*{age}">text</td>
+										<td th:text="*{username}">text</td>
+										<td th:text="*{rolesToSingleString()}"></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
-
 </html>

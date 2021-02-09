@@ -1,0 +1,21 @@
+html, body {
+    background: #f2f2f2;
+    height: 100%;
+}
+.aside {
+    background: white;
+    height: 100%;
+    position: fixed;
+    width: 265px;
+}
+.wrapper {
+    flex-grow: 1;
+    padding-left: 265px;
+}
+.page {
+    min-height: calc(100vh - 30px);
+}
+label {
+    margin-bottom: 0;
+    font-weight: bold;
+}

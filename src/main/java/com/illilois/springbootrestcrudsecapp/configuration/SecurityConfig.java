@@ -3,6 +3,7 @@ package com.illilois.springbootrestcrudsecapp.configuration;
 import com.illilois.springbootrestcrudsecapp.configuration.handler.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,13 +40,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .formLogin()
+                .loginPage("/login")
                 .successHandler(loginSuccessHandler)
+                .loginProcessingUrl("/login")
+                .usernameParameter("inputLogin")
+                .passwordParameter("inputPass")
                 .permitAll();
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/user/{id}").hasAnyAuthority("ADMIN", "USER")
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated();
         http
                 .logout()
