@@ -7,6 +7,7 @@ html, body {
     height: 100%;
     position: fixed;
     width: 265px;
+    z-index: 2;
 }
 .wrapper {
     flex-grow: 1;
@@ -18,4 +19,9 @@ html, body {
 label {
     margin-bottom: 0;
     font-weight: bold;
+}
+.topbar {
+    position: fixed;
+    width: 100%;
+    z-index: 3;
 }

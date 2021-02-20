@@ -24,12 +24,12 @@ public class Role implements GrantedAuthority {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+//    @ManyToMany(mappedBy = "roles")
+//    private Set<User> users;
 
     public Role(String name) {
         this.name = name;
-        this.users=new HashSet<>();
+//        this.users=new HashSet<>();
     }
 
     @Override

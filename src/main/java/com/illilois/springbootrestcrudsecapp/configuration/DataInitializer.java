@@ -41,20 +41,18 @@ public class DataInitializer {
     private void initUsers() {
         User user = new User();
         user.setUsername("admin@mail.ru");
-//        user.setUsername("a@a.a");
         user.setPassword("a");
-        user.setFirstName("Adminiy");
-        user.setLastName("Adminenko");
+        user.setFirstName("Admin");
+        user.setLastName("Adminyan");
         user.setAge(30);
         user.setRoles(Set.of(roleService.getRoleByName("ADMIN"),roleService.getRoleByName("USER")));
         userService.saveUser(user);
 
         User user2 = new User();
         user2.setUsername("user@mail.ru");
-//        user2.setUsername("u@u.u");
         user2.setPassword("u");
-        user2.setFirstName("Useron");
-        user2.setLastName("Userashvili");
+        user2.setFirstName("Userbay");
+        user2.setLastName("Userbaev");
         user2.setAge(21);
         user2.setRoles(Set.of(roleService.getRoleByName("USER")));
         userService.saveUser(user2);

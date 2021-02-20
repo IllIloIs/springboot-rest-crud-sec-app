@@ -1,16 +1,21 @@
 package com.illilois.springbootrestcrudsecapp.service;
 
 import com.illilois.springbootrestcrudsecapp.entity.User;
+import com.illilois.springbootrestcrudsecapp.entity.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUsers();
+    List<UserDto> getAllUsers();
+
+    UserDto getUserById(Long id);
+
+    void deleteUser(Long id);
 
     void saveUser(User user);
 
-    User getUserById(Long id);
+    public User dtoToEntity(UserDto userDTO);
 
-    void deleteUser(Long id);
+    public UserDto entityToDto(User user);
 
 }
