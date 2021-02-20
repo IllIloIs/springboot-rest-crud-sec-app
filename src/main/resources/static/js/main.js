@@ -83,7 +83,7 @@ function jsonToRow(jsonObject) {
 function fetchUsersToTable(data) {
     usersTable = document.getElementById("allUsersTableFetch")
     data.forEach((dataItem) => {
-        usersTable.insertAdjacentHTML('afterBegin', jsonToRow(dataItem))
+        usersTable.insertAdjacentHTML('beforeend', jsonToRow(dataItem))
         // usersTable.append(jsonToRow(dataItem))
     })
 }
